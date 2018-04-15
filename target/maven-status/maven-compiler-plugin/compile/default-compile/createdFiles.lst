@@ -1,0 +1,4 @@
+com/airhacks/JAXRSConfiguration.class
+com/airhacks/rest/ItemResource.class
+com/airhacks/persistence/ItemRepository.class
+com/airhacks/persistence/Item.class
