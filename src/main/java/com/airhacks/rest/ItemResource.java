@@ -24,7 +24,7 @@ public class ItemResource {
     public Response findById(@PathParam("id") long id) {
         return repository.findById(id)
             .map(item -> Response.ok(toJson(item), MediaType.APPLICATION_JSON_TYPE).build())
-            .orElseGet(() -> Response.status(Response.Status.NOT_FOUND).build());
+            .orElseGet(() -> Response.status(Response.Status.NOT_FOUND).entity("Item of id "+id+" not found.").build());
     }
 
     @POST
