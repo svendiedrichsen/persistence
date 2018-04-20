@@ -8,7 +8,7 @@ import java.util.Optional;
 @Stateless
 public class ItemRepository {
 
-    @PersistenceContext(name = "java:global/MyDS")
+    @PersistenceContext
     private EntityManager entityManager;
 
     public Optional<Item> findById(long id) {
