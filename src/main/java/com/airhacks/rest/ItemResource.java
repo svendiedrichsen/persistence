@@ -23,10 +23,10 @@ public class ItemResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findById(@PathParam("id") long id) {
         return repository.findById(id)
-            .map(item -> Response.ok(toJson(item), MediaType.APPLICATION_JSON_TYPE).build())
+            .map(item -> Response.ok(toJson(item)).build())
             .orElseGet(() -> Response.status(Response.Status.NOT_FOUND)
                 .entity(Json.createObjectBuilder()
-                        .add("result", "Item of id "+id+" not found.")
+                        .add("message", "Item of id "+id+" not found.")
                         .build()
                 ).build()
             );
@@ -37,7 +37,21 @@ public class ItemResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(@PathParam("content") String content) {
         Item item = repository.create(content);
-        return Response.ok(toJson(item), MediaType.APPLICATION_JSON_TYPE).build();
+        return Response.ok(toJson(item)).build();
+    }
+
+    @PUT
+    @Path("{id}/{content}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response update(@PathParam("id") long id, @PathParam("content") String content) {
+        return repository.update(id, content)
+            .map(item -> Response.ok(toJson(item)).build())
+            .orElseGet(() -> Response.status(Response.Status.NOT_FOUND)
+                .entity(Json.createObjectBuilder()
+                        .add("message", "Item of id "+id+" not found.")
+                        .build()
+                ).build()
+            );
     }
 
     private JsonObject toJson(Item item) {

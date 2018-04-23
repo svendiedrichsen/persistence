@@ -22,4 +22,10 @@ public class ItemRepository {
         return item;
     }
 
+    public Optional<Item> update(long id, String content) {
+        Optional<Item> itemById = findById(id);
+        itemById.ifPresent(i -> i.setContent(content));
+        return itemById;
+    }
+
 }

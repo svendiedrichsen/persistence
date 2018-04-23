@@ -3,6 +3,7 @@ package com.airhacks.persistence;
 import org.eclipse.persistence.annotations.Cache;
 import org.eclipse.persistence.annotations.CacheCoordinationType;
 
+import javax.json.Json;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -20,6 +21,9 @@ public class Item implements Serializable {
 
     @Column(nullable = false)
     private String content;
+
+    @Version
+    private long version;
 
     public Long getId() {
         return id;
@@ -44,5 +48,14 @@ public class Item implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", version=" + version +
+                '}';
     }
 }
